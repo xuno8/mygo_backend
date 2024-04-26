@@ -56,7 +56,7 @@ def get_image(item_id: str):
         raise HTTPException(status_code=404, detail="Item not found")
 
     # 在此修改vids路徑
-    video_filename = f"vids/{record['episode']}.mp4"
+    video_filename = f"/vids/{record['episode']}.mp4"
     frame_number = random.randint(record['start_frame'], record['end_frame'])
     image_data = extract_frame(video_filename, frame_number, save_to_file=False)
     if image_data:
@@ -66,7 +66,7 @@ def get_image(item_id: str):
 
 @app.get("/random-image")
 def get_random_image():
-    video_directory = 'vids'  # 確保這是正確的路徑
+    video_directory = '/vids'  # 確保這是正確的路徑
     image_data, episode, time_info = extract_random_frame(video_directory)
     if image_data:
         return JSONResponse(content={
