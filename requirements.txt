@@ -7,10 +7,12 @@ elastic-transport==8.13.0
 elasticsearch==8.13.0
 exceptiongroup==1.2.1
 fastapi==0.110.2
+gunicorn==22.0.0
 h11==0.14.0
 idna==3.7
 numpy==1.26.4
 opencv-python==4.9.0.80
+packaging==24.0
 pandas==2.2.2
 pydantic==2.7.1
 pydantic_core==2.18.2
