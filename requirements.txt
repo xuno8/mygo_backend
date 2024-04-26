@@ -11,7 +11,7 @@ gunicorn==22.0.0
 h11==0.14.0
 idna==3.7
 numpy==1.26.4
-opencv-python==4.9.0.80
+opencv-python-headless==4.9.0.80
 packaging==24.0
 pandas==2.2.2
 pydantic==2.7.1
