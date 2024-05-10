@@ -10,6 +10,7 @@ import pandas as pd
 import random
 from fastapi.responses import Response, JSONResponse
 import base64
+from fastapi.middleware.cors import CORSMiddleware
 
 # 在啟動時載入 CSV 數據到全局變量
 df = pd.read_csv('search_results_20240426_181613.csv')
@@ -26,6 +27,19 @@ es_client = Elasticsearch(
 )
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173",  
+    # "https://yourfrontenddomain.com"  
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
+)
 
 class SearchRequest(BaseModel):
     query: str
