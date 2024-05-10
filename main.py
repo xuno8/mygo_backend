@@ -28,28 +28,30 @@ es_client = Elasticsearch(
 
 app = FastAPI()
 
-# origins = [
-#     # "http://localhost:5173",  
-#     # "https://yourfrontenddomain.com" 
-#     "*" 
-# ]
+origins = [
+    # local
+    "http://localhost:5173",
+    "http://192.168.0.12:5173/"
+    # hosting
+    # "https://yourfrontenddomain.com" 
+]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,  
-#     allow_credentials=True,
-#     allow_methods=["GET", "POST", "OPTIONS"],
-#     allow_headers=["*"],
-# )
-
-# for testing
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,  
     allow_credentials=True,
-    allow_methods=["*"],  
+    allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# for testing
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],  
+#     allow_headers=["*"],
+# )
 
 class SearchRequest(BaseModel):
     query: str
