@@ -76,29 +76,48 @@ def search(request: SearchRequest):
 
 @app.get("/id/{item_id}")
 def get_image(item_id: str):
-    print(item_id)
+    # print(item_id)
     record = df[df['id'] == item_id].iloc[0]
     if record.empty:
         raise HTTPException(status_code=404, detail="Item not found")
 
-    # 在此修改vids路徑
+    # Cloud
     video_filename = f"/vids/{record['episode']}.mp4"
+    # Local
+    # video_filename = f"vids/{record['episode']}.mp4"
     frame_number = random.randint(record['start_frame'], record['end_frame'])
     image_data = extract_frame(video_filename, frame_number, save_to_file=False)
     if image_data:
-        return Response(content=image_data, media_type='image/jpeg')
+        print(record['episode'], record['start_time'])
+        # return Response(content=image_data, media_type='image/jpeg')
+        
+        # return JSONResponse(content={
+        #     "image_data": "data:image/jpeg;base64," + base64.b64encode(image_data).decode(),
+        #     "episode": record['episode'],
+        #     "time_info": record['start_time']
+        # }, media_type='application/json')
+        response_data = {
+        "text": record['text'],
+        "episode": int(record['episode']),
+        "time_info": record['start_time'],
+        "image_data": "data:image/jpeg;base64," + base64.b64encode(image_data).decode(),
+        }
+        return JSONResponse(content=response_data)
     else:
         raise HTTPException(status_code=500, detail="Failed to extract frame")
 
 @app.get("/random-image")
 def get_random_image():
-    video_directory = '/vids'  # 確保這是正確的路徑
+    #Cloud
+    video_directory = '/vids'
+    #Local
+    # video_directory = 'vids'
     image_data, episode, time_info = extract_random_frame(video_directory)
     if image_data:
         return JSONResponse(content={
-            "image_data": "data:image/jpeg;base64," + base64.b64encode(image_data).decode(),
             "episode": episode,
-            "time_info": time_info
+            "time_info": time_info,
+            "image_data": "data:image/jpeg;base64," + base64.b64encode(image_data).decode(),
         }, media_type='application/json')
     else:
         return {"error": "Failed to extract frame"}
