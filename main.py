@@ -31,9 +31,10 @@ app = FastAPI()
 origins = [
     # local
     "http://localhost:5173",
-    "http://192.168.0.12:5173/"
     # hosting
-    # "https://yourfrontenddomain.com" 
+    "https://red-forest-0b9298900.5.azurestaticapps.net/",
+    "https://somygo.xuno8.com/"
+
 ]
 
 app.add_middleware(
