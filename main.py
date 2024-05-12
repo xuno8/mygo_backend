@@ -32,9 +32,9 @@ origins = [
     # local
     "http://localhost:5173",
     # hosting
-    "https://red-forest-0b9298900.5.azurestaticapps.net/",
-    "https://somygo.xuno8.com/",
-    "https://somygo.com/",
+    "https://red-forest-0b9298900.5.azurestaticapps.net",
+    "https://somygo.xuno8.com",
+    "https://somygo.com",
 
 ]
 
