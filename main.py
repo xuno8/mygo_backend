@@ -12,7 +12,7 @@ from fastapi.responses import Response, JSONResponse
 import base64
 from fastapi.middleware.cors import CORSMiddleware
 
-# 在啟動時載入 CSV 數據到全局變量
+
 df = pd.read_csv('search_results_20240426_181613.csv')
 load_dotenv()
 

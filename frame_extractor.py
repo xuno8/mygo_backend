@@ -9,11 +9,10 @@ def extract_frame(video_path, frame_number, save_to_file=False):
     success, frame = cap.read()
     if success:
         if save_to_file:
-            # 保存圖片到當前目錄下的指定檔名
             filename = f"frame_{frame_number}.jpeg"
             cv2.imwrite(filename, frame)
             print(f"Saved frame as {filename}")
-        # 繼續將圖片以二進位形式返回
+        # 將圖片以二進位形式返回
         _, buffer = cv2.imencode('.jpeg', frame)
         return buffer.tobytes()
     cap.release()
@@ -39,7 +38,6 @@ def extract_random_frame(video_directory):
         minutes = int(frame_time // 60)
         seconds = int(frame_time % 60)
 
-        # 格式化為兩位數的時間格式
         time_formatted = "{:02}:{:02}".format(minutes, seconds)
 
         _, buffer = cv2.imencode('.jpeg', frame)
@@ -51,8 +49,7 @@ def extract_random_frame(video_directory):
 import re
 
 def extract_episode_number(filename):
-    # 使用正則表達式從文件名中提取數字
     match = re.search(r'\d+', filename)
     if match:
-        return match.group()  # 返回匹配的數字字符串
+        return match.group()
     return None

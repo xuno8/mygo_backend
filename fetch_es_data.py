@@ -6,7 +6,7 @@ import os
 from search_service import parse_search_results
 from datetime import datetime
 
-# 加載環境變數
+
 load_dotenv()
 
 ES_URL = os.getenv('ELASTICSEARCH_URL')
@@ -25,7 +25,7 @@ def fetch_data():
         raise Exception(f"Failed to fetch data: {response.status_code} - {response.text}")
 
 def save_to_csv(search_results):
-    # 獲取當前日期和時間
+
     current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = f"search_results_{current_time}.csv"
 
